@@ -1,4 +1,4 @@
-package com.ttsh.carbonwallet.ui.theme
+package com.ttsh.carbonwallet.presentation.theme
 
 import android.app.Activity
 import android.os.Build
