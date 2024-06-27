@@ -60,7 +60,11 @@ class MainActivity : ComponentActivity() {
                     NavHost(navController = navController, startDestination = ScreenRoute.SplashScreen.route) {
                         composable(ScreenRoute.SplashScreen.route) {
 
-                            SplashScreen({navController.navigate("authentication")})
+                            SplashScreen({navController.navigate("authentication") {
+                                this.popUpTo(ScreenRoute.SplashScreen.route) {
+                                    this.inclusive = true
+                                }
+                            } })
                         }
                         composable(ScreenRoute.TutorialScreen.route) {
                             TutorialScreen()
@@ -70,10 +74,15 @@ class MainActivity : ComponentActivity() {
                         }
                         navigation(route = "authentication",startDestination = ScreenRoute.LoginScreen.route) {
                             composable(ScreenRoute.LoginScreen.route) {
-                                LoginScreen()
+                                LoginScreen(onAuthenticated = {navController.navigate("users")}, toRegister = {
+                                    navController.navigate(ScreenRoute.RegisterScreen.route)
+                                })
                             }
                             composable(ScreenRoute.RegisterScreen.route) {
-                                RegisterScreen()
+                                RegisterScreen(toLogin = {
+                                    navController.navigate(ScreenRoute.LoginScreen.route)
+
+                                }, toHome = {navController.navigate("users")})
                             }
                         }
                         navigation(route = "users", startDestination = "home") {
