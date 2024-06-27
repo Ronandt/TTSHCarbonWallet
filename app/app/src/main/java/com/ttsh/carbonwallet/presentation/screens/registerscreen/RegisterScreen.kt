@@ -53,8 +53,8 @@ fun RegisterScreen(toLogin: () -> Unit, toHome: () -> Unit, viewModel: RegisterV
                 viewModel.onEvent(RegisterEvent.ChangePasswordField(it) )
             }, title ="Password", textFieldType = TextFieldType.Password )
             ApplicationTextField(value = uiState.value.confirmPassword, onValueChange = {
-                println("sdf")
-                viewModel.onEvent(RegisterEvent.ChangeEmailField(it))
+                println(it)
+                viewModel.onEvent(RegisterEvent.ChangeConfirmPasswordField(it))
             } , title = "Confirm password", textFieldType = TextFieldType.Password)
             Spacer(modifier = Modifier.height(formPadding))
             ApplicationButton(text = "Register", onClick = toHome)

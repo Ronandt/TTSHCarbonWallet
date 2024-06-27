@@ -20,17 +20,17 @@ class RegisterViewModel @Inject constructor(): ViewModel() {
         when(registerEvent) {
             is RegisterEvent.ChangeEmailField -> {
                 _registerUiState.update {
-                    it.copy(email = it.email)
+                    it.copy(email = registerEvent.email)
                 }
             }
             is RegisterEvent.ChangeConfirmPasswordField -> {
                 _registerUiState.update {
-                    it.copy(password= it.password)
+                    it.copy(confirmPassword=  registerEvent.confirmPassword)
                 }
             }
             is RegisterEvent.ChangePasswordField-> {
                 _registerUiState.update {
-                    it.copy(confirmPassword = it.confirmPassword)
+                    it.copy(password = registerEvent.password)
                 }
             }
 
