@@ -1,5 +1,6 @@
 package com.ttsh.carbonwallet.presentation.screens.splashscreen
 
+import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -18,6 +20,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -32,10 +36,14 @@ import com.ttsh.carbonwallet.presentation.utils.ScreenStatus
 @Composable
 fun SplashScreen(onNavigate: () -> Unit, viewModel:SplashViewModel=  hiltViewModel())  {
     val uiState = viewModel.splashUiState.collectAsStateWithLifecycle()
+    val window = (LocalView.current .context as Activity).window
 
     LaunchedEffect(uiState.value) {
         if(uiState.value.status is ScreenStatus.Success) {
+            window.statusBarColor = Color.White.toArgb()
             onNavigate()
+        } else if(uiState.value.status is ScreenStatus.Loading) {
+            window.statusBarColor = Primary.toArgb()
         }
     }
 

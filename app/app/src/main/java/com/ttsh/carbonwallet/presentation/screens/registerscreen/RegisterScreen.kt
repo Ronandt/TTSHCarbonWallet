@@ -28,6 +28,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ttsh.carbonwallet.presentation.screens.loginscreen.LoginEvent
 import com.ttsh.carbonwallet.presentation.sharedcomponents.ApplicationButton
 import com.ttsh.carbonwallet.presentation.sharedcomponents.ApplicationCheckbox
+import com.ttsh.carbonwallet.presentation.sharedcomponents.ApplicationColumn
 import com.ttsh.carbonwallet.presentation.sharedcomponents.ApplicationLogo
 import com.ttsh.carbonwallet.presentation.sharedcomponents.ApplicationTextField
 import com.ttsh.carbonwallet.presentation.sharedcomponents.TextFieldType
@@ -38,8 +39,8 @@ import com.ttsh.carbonwallet.presentation.theme.PrimaryGreen
 fun RegisterScreen(toLogin: () -> Unit, toHome: () -> Unit, viewModel: RegisterViewModel = hiltViewModel()) {
     val uiState = viewModel.registerUiState.collectAsStateWithLifecycle()
     val formPadding = remember {20.dp}
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Column(verticalArrangement = Arrangement.spacedBy(10.dp), horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(10.dp )) {
+
+        ApplicationColumn {
             ApplicationLogo()
             Text(text = "Register" , fontWeight = FontWeight.Bold, color = Primary, fontSize = 22.sp    )
             Text(text = "Start tracking today!", fontWeight = FontWeight.SemiBold)
@@ -71,5 +72,5 @@ fun RegisterScreen(toLogin: () -> Unit, toHome: () -> Unit, viewModel: RegisterV
 
         }
 
-    }
+
 }
