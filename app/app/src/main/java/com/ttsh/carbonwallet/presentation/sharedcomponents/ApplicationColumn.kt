@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ApplicationColumn(content: @Composable () -> Unit) {
-    Column(modifier = Modifier.fillMaxSize().padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally ,verticalArrangement = Arrangement.spacedBy(10.dp, alignment = Alignment.CenterVertically   )) {
+fun ApplicationColumn( verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(10.dp, alignment = Alignment.CenterVertically   ), content: @Composable () -> Unit) {
+    Column(modifier = Modifier.fillMaxSize().padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally ,verticalArrangement = verticalArrangement) {
         content()
     }
 }
