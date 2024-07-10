@@ -11,6 +11,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
@@ -50,7 +51,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-
+            val scope = rememberCoroutineScope()
             CarbonWalletTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -70,7 +71,7 @@ class MainActivity : ComponentActivity() {
                             TutorialScreen()
                         }
                         composable(ScreenRoute.InformationOnboardingScreen.route) {
-                           InformationOnboardingScreen()
+                           InformationOnboardingScreen(scope = scope)
                         }
                         navigation(route = "authentication",startDestination = ScreenRoute.LoginScreen.route) {
                             composable(ScreenRoute.LoginScreen.route) {
@@ -82,7 +83,7 @@ class MainActivity : ComponentActivity() {
                                 RegisterScreen(toLogin = {
                                     navController.navigate(ScreenRoute.LoginScreen.route)
 
-                                }, toHome = {navController.navigate("users")})
+                                }, toHome = {navController.navigate(ScreenRoute.InformationOnboardingScreen.route)})
                             }
                         }
                         navigation(route = "users", startDestination = "home") {
