@@ -25,9 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.ttsh.carbonwallet.presentation.screens.loginscreen.LoginEvent
 import com.ttsh.carbonwallet.presentation.sharedcomponents.ApplicationButton
-import com.ttsh.carbonwallet.presentation.sharedcomponents.ApplicationCheckbox
 import com.ttsh.carbonwallet.presentation.sharedcomponents.ApplicationLogo
 import com.ttsh.carbonwallet.presentation.sharedcomponents.ApplicationTextField
 import com.ttsh.carbonwallet.presentation.sharedcomponents.TextFieldType
@@ -43,13 +41,11 @@ fun RegisterScreen(toLogin: () -> Unit, toHome: () -> Unit, viewModel: RegisterV
             ApplicationLogo()
             Text(text = "Register" , fontWeight = FontWeight.Bold, color = Primary, fontSize = 22.sp    )
             Text(text = "Start tracking today!", fontWeight = FontWeight.SemiBold)
-
-            Spacer(modifier = androidx.compose.ui.Modifier.height(formPadding))
+            Spacer(modifier = Modifier.height(formPadding))
             ApplicationTextField(value = uiState.value.email , onValueChange = {
                 viewModel.onEvent(RegisterEvent.ChangeEmailField(it))
             }, title ="Email" )
             ApplicationTextField(value = uiState.value.password , onValueChange = {
-
                 viewModel.onEvent(RegisterEvent.ChangePasswordField(it) )
             }, title ="Password", textFieldType = TextFieldType.Password )
             ApplicationTextField(value = uiState.value.confirmPassword, onValueChange = {
