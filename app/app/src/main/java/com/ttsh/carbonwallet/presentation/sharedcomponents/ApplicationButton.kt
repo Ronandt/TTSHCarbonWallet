@@ -16,10 +16,10 @@ import androidx.compose.ui.unit.sp
 import com.ttsh.carbonwallet.presentation.theme.Primary
 
 @Composable
-fun ApplicationButton(text: String, onClick: ()->Unit, modifier: Modifier = Modifier) {
+fun ApplicationButton(text: String, onClick: ()->Unit, enabled: Boolean = true, modifier: Modifier = Modifier) {
     Button(onClick = onClick, modifier = Modifier
         .fillMaxWidth()
-        .then(modifier), colors = ButtonDefaults.buttonColors(containerColor = Primary), shape = RoundedCornerShape(8.dp    )) {
+        .then(modifier), enabled = enabled, colors = ButtonDefaults.buttonColors(containerColor = Primary), shape = RoundedCornerShape(8.dp    )) {
         Text(text = text, fontWeight = FontWeight.SemiBold, color = Color.White, fontSize = 18.sp, modifier = Modifier.padding(4.dp ))
     }
 }

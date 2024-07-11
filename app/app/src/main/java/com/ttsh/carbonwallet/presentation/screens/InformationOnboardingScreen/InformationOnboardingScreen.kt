@@ -65,7 +65,7 @@ fun InformationOnboardingScreen(viewModel: InformationOnboardingViewModel = hilt
            }
         }
         ApplicationColumn(verticalArrangement = Arrangement.spacedBy(10.dp  )) {
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(40.dp))
             HorizontalPager(pageCount =    uiState.value.pagerOnboardingItems.size, state = pagerState) {
                 Column(verticalArrangement = Arrangement.spacedBy(14.dp, alignment = Alignment.CenterVertically), horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
                     AsyncImage(pagerList[it].image, contentDescription = pagerList[it].header , modifier = Modifier.size(250.dp ), contentScale = ContentScale.Crop)
