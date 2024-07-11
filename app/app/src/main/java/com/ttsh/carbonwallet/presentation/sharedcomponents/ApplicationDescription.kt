@@ -11,5 +11,5 @@ import com.ttsh.carbonwallet.presentation.theme.DescriptionGray
 
 @Composable
 fun ApplicationDescription(text: String, textAlign: TextAlign = TextAlign.Left, modifier: Modifier = Modifier) {
-    Text(text = text, textAlign = textAlign, modifier = modifier, lineHeight =18.sp  , color =  DescriptionGray, fontSize = 16.sp  )
+    Text(text = text, textAlign = textAlign, modifier = modifier, lineHeight =20.sp  , color =  DescriptionGray, fontSize = 16.sp  )
 }
