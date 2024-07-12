@@ -4,7 +4,7 @@ sealed class ScreenRoute(val route: String, val routeHierarchy: String = "", val
     object SplashScreen : ScreenRoute("splash_screen")
     object LoginScreen : ScreenRoute("login_screen")
     object RegisterScreen : ScreenRoute("register_screen")
-    object TutorialScreen : ScreenRoute("tutorial_screen")
+    object FormOnboardingScreen : ScreenRoute("form_onboarding_screen")
     object InformationOnboardingScreen : ScreenRoute("information_onboarding_screen")
     object LeaderboardScreen : ScreenRoute("leaderboard_screen")
     object HomeScreen : ScreenRoute("home_screen")

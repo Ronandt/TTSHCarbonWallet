@@ -3,14 +3,11 @@ package com.ttsh.carbonwallet
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,6 +21,7 @@ import com.ttsh.carbonwallet.presentation.screens.earnwithmerchantdetailsscreen.
 import com.ttsh.carbonwallet.presentation.screens.earnwithmerchantlistscreen.EarnedWithMerchantListScreen
 import com.ttsh.carbonwallet.presentation.screens.enteredeventscreen.EnteredEventScreen
 import com.ttsh.carbonwallet.presentation.screens.eventsuccessscreen.EventSuccessScreen
+import com.ttsh.carbonwallet.presentation.screens.formonboardingscreen.FormOnboardingScreen
 import com.ttsh.carbonwallet.presentation.screens.homescreen.HomeScreen
 import com.ttsh.carbonwallet.presentation.screens.leaderboardscreen.LeaderboardScreen
 import com.ttsh.carbonwallet.presentation.screens.loginscreen.LoginScreen
@@ -40,7 +38,6 @@ import com.ttsh.carbonwallet.presentation.screens.splashscreen.SplashScreen
 import com.ttsh.carbonwallet.presentation.screens.triviadetailsscreen.TriviaDetailsScreen
 import com.ttsh.carbonwallet.presentation.screens.triviaresultsscreen.TriviaResultsScreen
 import com.ttsh.carbonwallet.presentation.screens.triviaroadmapscreen.TriviaRoadMapScreen
-import com.ttsh.carbonwallet.presentation.screens.tutorialscreen.TutorialScreen
 import com.ttsh.carbonwallet.presentation.theme.CarbonWalletTheme
 import com.ttsh.carbonwallet.presentation.utils.ScreenRoute
 import dagger.hilt.android.AndroidEntryPoint
@@ -67,11 +64,13 @@ class MainActivity : ComponentActivity() {
                                 }
                             } })
                         }
-                        composable(ScreenRoute.TutorialScreen.route) {
-                            TutorialScreen()
+                        composable(ScreenRoute.FormOnboardingScreen.route) {
+                            FormOnboardingScreen()
                         }
                         composable(ScreenRoute.InformationOnboardingScreen.route) {
-                           InformationOnboardingScreen(scope = scope)
+                           InformationOnboardingScreen(scope = scope) {
+                               navController.navigate(ScreenRoute.FormOnboardingScreen.route)
+                           }
                         }
                         navigation(route = "authentication",startDestination = ScreenRoute.LoginScreen.route) {
                             composable(ScreenRoute.LoginScreen.route) {

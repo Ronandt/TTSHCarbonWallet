@@ -13,7 +13,7 @@ class InformationOnboardingViewModel @Inject constructor(): ViewModel() {
         PagerOnboardingItemState("Learn Eco-Friendliness",
             "Choose greener alternatives to reduce your carbon footprint", R.drawable.stop_air_pollution_carbon_dioxide ),
         PagerOnboardingItemState("Earn Rewards",
-            "Earn valuable rewards and points by trakcing your carbon use", R.drawable.happy_woman_receiving_gift),
+            "Earn valuable rewards and points by tracking your carbon", R.drawable.happy_woman_receiving_gift),
         PagerOnboardingItemState("Track your carbon",
             "Track your carbon expenditure, and know your carbon impact", R.drawable.icon_individual)
 
