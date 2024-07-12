@@ -1,6 +1,7 @@
 package com.ttsh.carbonwallet
 
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,6 +16,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.systemuicontroller.SystemUiController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.ttsh.carbonwallet.presentation.screens.InformationOnboardingScreen.InformationOnboardingScreen
 import com.ttsh.carbonwallet.presentation.screens.earnedmerchantpointsscreen.EarnedMerchantPointsScreen
 import com.ttsh.carbonwallet.presentation.screens.earnwithmerchantdetailsscreen.EarnWithMerchantDetailsScreen
@@ -45,8 +48,16 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
+
         setContent {
+            val systemUiController: SystemUiController = rememberSystemUiController()
+
+            systemUiController.isStatusBarVisible = false // Status bar
+            systemUiController.isNavigationBarVisible = false // Navigation bar
+            systemUiController.isSystemBarsVisible = false // Status & Navigation bars
+
             val navController = rememberNavController()
             val scope = rememberCoroutineScope()
 

@@ -36,14 +36,11 @@ import com.ttsh.carbonwallet.presentation.utils.ScreenStatus
 @Composable
 fun SplashScreen(onNavigate: () -> Unit, viewModel:SplashViewModel=  hiltViewModel())  {
     val uiState = viewModel.splashUiState.collectAsStateWithLifecycle()
-    val window = (LocalView.current .context as Activity).window
+
 
     LaunchedEffect(uiState.value) {
         if(uiState.value.status is ScreenStatus.Success) {
-            window.statusBarColor = Color.White.toArgb()
             onNavigate()
-        } else if(uiState.value.status is ScreenStatus.Loading) {
-            window.statusBarColor = Primary.toArgb()
         }
     }
 
