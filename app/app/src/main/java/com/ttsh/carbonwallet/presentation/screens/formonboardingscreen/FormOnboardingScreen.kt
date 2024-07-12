@@ -1,6 +1,7 @@
 package com.ttsh.carbonwallet.presentation.screens.formonboardingscreen
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,6 +13,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExitToApp
@@ -29,6 +32,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,81 +46,61 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.ttsh.carbonwallet.R
+import com.ttsh.carbonwallet.presentation.screens.formonboardingscreen.subscreens.EnterPersonalDetailsScreen
+import com.ttsh.carbonwallet.presentation.screens.formonboardingscreen.subscreens.SelectTransportationScreen
+import com.ttsh.carbonwallet.presentation.screens.formonboardingscreen.subscreens.TransportationMode
 import com.ttsh.carbonwallet.presentation.sharedcomponents.ApplicationButton
 import com.ttsh.carbonwallet.presentation.sharedcomponents.ApplicationColumn
 import com.ttsh.carbonwallet.presentation.sharedcomponents.ApplicationDescription
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.selects.select
 
-enum class TransportationMode {
-    Train,
-    Bus,
-    Bicycle,
-    Walk,
-    None
+enum class SubScreen {
+    SelectTransportation,
+    EnterPersonalDetails
+
+
 }
-
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
-fun FormOnboardingScreen(){
-    val transportationModeChoices = remember {listOf(TransportationMode.Train, TransportationMode.Bus, TransportationMode.Bicycle, TransportationMode.Walk)}
-    var selectedTransportationMode by remember {mutableStateOf<TransportationMode>(TransportationMode.None)}
-
+fun FormOnboardingScreen(scope: CoroutineScope){
+    val pagerState = rememberPagerState()
+    val subScreenList = remember {
+        listOf(SubScreen.SelectTransportation,
+            SubScreen.EnterPersonalDetails)
+    }
     ApplicationColumn(verticalArrangement = Arrangement.spacedBy(0.dp   )) {
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-            Text(text = "Select Transportation", fontWeight = FontWeight.Bold, fontSize = 20.sp )
-            IconButton(onClick = { }, ) {
-                Icon(imageVector = Icons.Default.ExitToApp, contentDescription = "Exit", modifier = Modifier.size(26.dp))
-            }
+        HorizontalPager(pageCount = subScreenList.size, state = pagerState, userScrollEnabled = false) {
+            when(subScreenList[it]) {
+                SubScreen.SelectTransportation -> {
+                    SelectTransportationScreen {
+                        scope.launch {
+                            pagerState.animateScrollToPage(it + 1)
+                        }
+                    }
 
-        }
-        Column(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.padding(bottom = 30.dp )) {
+                }
+                SubScreen.EnterPersonalDetails -> {
+                    EnterPersonalDetailsScreen(
+                        scope
 
-            ApplicationDescription(
-                text = "Select the mode of transportation that you take everyday", modifier = Modifier
-            )
-        }
-
-
-        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            transportationModeChoices.forEach {
-                val cardColour by animateColorAsState(targetValue =if(selectedTransportationMode == it)  Color(0x699D160D) else MaterialTheme.colorScheme.surfaceVariant )
-                Card(modifier = Modifier.fillMaxWidth(), onClick = {
-                    selectedTransportationMode = it
-                }, colors = CardDefaults.cardColors(containerColor =cardColour)) {
-                    Row(modifier = Modifier
-                        .padding(20.dp)
-                        .fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-
-                        Text(text = it.name, fontSize = 18.sp     )
-                        AsyncImage(model = R.drawable.double_decker, contentDescription ="Transportation Mode: $it", modifier = Modifier
-                            .size(50.dp)
-                            .clip(
-                                CircleShape
-                            ), contentScale = ContentScale.Crop, )
+                    ) {
+                        scope.launch {
+                            pagerState.animateScrollToPage(it -1)
+                        }
                     }
                 }
             }
         }
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 16.dp), horizontalArrangement = Arrangement.spacedBy(2.dp, Alignment.CenterHorizontally  )) {
-            if(selectedTransportationMode!= TransportationMode.None) {
-                Icon(Icons.Default.Info, contentDescription = "Info" )
-                Text(text = "You have selected ${selectedTransportationMode.name}", fontWeight = FontWeight.SemiBold)
-            }
 
-            
-        }
-        
-        ApplicationButton(text = "Continue", onClick = { }, modifier = Modifier.padding(top = 10.dp    ), enabled = selectedTransportationMode != TransportationMode.None)
 
-        
-        
+
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun FormOnboardingScreenPreview() {
-    FormOnboardingScreen()
+    FormOnboardingScreen(rememberCoroutineScope())
 }

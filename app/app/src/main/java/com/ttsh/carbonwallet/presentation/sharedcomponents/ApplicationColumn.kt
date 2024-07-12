@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun ApplicationColumn( verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(10.dp, alignment = Alignment.CenterVertically   ), content: @Composable () -> Unit) {
-    Column(modifier = Modifier.fillMaxSize().padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally ,verticalArrangement = verticalArrangement) {
+    Column(modifier = Modifier.fillMaxSize().padding(horizontal = 20.dp), horizontalAlignment = Alignment.CenterHorizontally ,verticalArrangement = verticalArrangement) {
         content()
     }
 }

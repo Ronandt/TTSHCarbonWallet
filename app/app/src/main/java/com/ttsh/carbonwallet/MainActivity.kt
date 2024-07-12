@@ -49,6 +49,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
             val scope = rememberCoroutineScope()
+
             CarbonWalletTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -65,7 +66,7 @@ class MainActivity : ComponentActivity() {
                             } })
                         }
                         composable(ScreenRoute.FormOnboardingScreen.route) {
-                            FormOnboardingScreen()
+                            FormOnboardingScreen(scope)
                         }
                         composable(ScreenRoute.InformationOnboardingScreen.route) {
                            InformationOnboardingScreen(scope = scope) {
