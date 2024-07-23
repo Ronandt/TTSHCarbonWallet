@@ -45,10 +45,6 @@ import com.ttsh.carbonwallet.presentation.theme.PrimaryGreen
 @Composable
 fun HomeScreen() {
     val localConfiguration = LocalConfiguration.current
-    LaunchedEffect(key1 = Unit) {
-        
-    }
-
 
 
 
@@ -60,11 +56,10 @@ Column {
             Spacer(modifier = Modifier
                 .requiredWidth(localConfiguration.screenWidthDp.dp * 1.2f)
                 .height(localConfiguration.screenWidthDp.dp * 1.2f)
-                .offset(y = -localConfiguration.screenWidthDp.dp / 1.6f)
+                .offset(y = -localConfiguration.screenWidthDp.dp / 1.5f)
                 .background(Primary, shape = CircleShape))
 
         ApplicationColumn(verticalArrangement = Arrangement.spacedBy(8.dp   ), fillEntireScreen = false) {
-            Spacer(modifier = Modifier.height(20.dp))
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Row(horizontalArrangement = Arrangement.spacedBy(4.dp   ), verticalAlignment = Alignment.CenterVertically){
                     Image(painter = painterResource(R.drawable.ic_launcher_background), contentDescription = "Profile picture", modifier = Modifier
@@ -86,7 +81,7 @@ Column {
             }
             Text(text = "Let's start", color = Color.White, fontSize = 40.sp)
             Text(text = "Start saving carbon today!", color =  Color.White, fontSize = 22.sp    )
-            Spacer(modifier = Modifier.height(100.dp))
+            Spacer(modifier = Modifier.height(40.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp   ), modifier = Modifier
                 .height(IntrinsicSize.Min)
                 .padding(vertical = 18.dp)) {
@@ -104,12 +99,23 @@ Column {
                 }
 
             }
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 10.dp), horizontalArrangement = Arrangement.Start,) {
                 Text(text = "Your Impact", fontSize = 20.sp )
+
             }
-            Card(modifier = Modifier.fillMaxSize()) {
-                CircularProgressIndicator(strokeWidth = 20.dp  , modifier = Modifier.size(100.dp    ))
+            Card(modifier = Modifier) {
+                Row(horizontalArrangement = Arrangement.spacedBy(10.dp )) {
+                    TPieChart()
+                    Text(text = "Food")
+                    Text(text = "Materials")
+                    Text(text = "Transport")
+                }
+
             }
+                  
+
 
         }
         }

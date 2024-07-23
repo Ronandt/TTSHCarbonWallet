@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun ApplicationColumn( modifier: Modifier = Modifier,verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(10.dp, alignment = Alignment.CenterVertically   ), fillEntireScreen: Boolean = true ,content: @Composable () -> Unit) {
-    Column(modifier = Modifier.then(if(fillEntireScreen)Modifier.fillMaxSize() else Modifier).padding(horizontal = 20.dp).then(modifier), horizontalAlignment = Alignment.CenterHorizontally ,verticalArrangement = verticalArrangement) {
+    Column(modifier = Modifier.then(if(fillEntireScreen)Modifier.fillMaxSize() else Modifier).padding( 20.dp).then(modifier), horizontalAlignment = Alignment.CenterHorizontally ,verticalArrangement = verticalArrangement) {
         content()
     }
 }
